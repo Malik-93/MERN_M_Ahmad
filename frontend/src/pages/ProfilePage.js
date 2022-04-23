@@ -27,6 +27,7 @@ import Meta from '../components/Meta';
 import axios from 'axios';
 import getDateString from '../utils/getDateString';
 import '../styles/profile-page.css';
+import { renderPrice } from '../utils/index';
 
 const ProfilePage = ({ history }) => {
 	const inputFile = useRef(null);
@@ -192,7 +193,7 @@ const ProfilePage = ({ history }) => {
 
 	return (
 		<Row className='mt-2'>
-			<Meta title='My Profile | Kosells' />
+			<Meta title='My Profile | M.Ahmad' />
 			{userInfo && !userInfo.isConfirmed ? (
 				<>
 					{emailSent && (
@@ -239,13 +240,13 @@ const ProfilePage = ({ history }) => {
 				style={
 					userInfo && !userInfo.isConfirmed
 						? {
-								opacity: '0.5',
-								pointerEvents: 'none',
-						  }
+							opacity: '0.5',
+							pointerEvents: 'none',
+						}
 						: {
-								opacity: '1',
-								pointerEvents: '',
-						  }
+							opacity: '1',
+							pointerEvents: '',
+						}
 				}>
 				<h2 className='text-center'>My Profile</h2>
 				{message && (
@@ -329,9 +330,9 @@ const ProfilePage = ({ history }) => {
 								style={
 									userInfo && userInfo.isSocialLogin
 										? {
-												pointerEvents: 'none',
-												opacity: '0.8',
-										  }
+											pointerEvents: 'none',
+											opacity: '0.8',
+										}
 										: {}
 								}>
 								<FloatingLabel
@@ -388,7 +389,7 @@ const ProfilePage = ({ history }) => {
 															borderLeft: 'none',
 														}}>
 														{typePassword ===
-														'text' ? (
+															'text' ? (
 															<i className='far fa-eye-slash' />
 														) : (
 															<i className='far fa-eye' />
@@ -434,7 +435,7 @@ const ProfilePage = ({ history }) => {
 															borderLeft: 'none',
 														}}>
 														{typeConfirmPassword ===
-														'text' ? (
+															'text' ? (
 															<i className='far fa-eye-slash' />
 														) : (
 															<i className='far fa-eye' />
@@ -466,13 +467,13 @@ const ProfilePage = ({ history }) => {
 				style={
 					userInfo && !userInfo.isConfirmed
 						? {
-								opacity: '0.5',
-								pointerEvents: 'none',
-						  }
+							opacity: '0.5',
+							pointerEvents: 'none',
+						}
 						: {
-								opacity: '1',
-								pointerEvents: '',
-						  }
+							opacity: '1',
+							pointerEvents: '',
+						}
 				}>
 				{allOrders.length ? (
 					<>
@@ -510,14 +511,7 @@ const ProfilePage = ({ history }) => {
 												{getDateString(order.createdAt)}
 											</td>
 											<td>
-												{order.totalPrice.toLocaleString(
-													'en-IN',
-													{
-														maximumFractionDigits: 0,
-														style: 'currency',
-														currency: 'INR',
-													}
-												)}
+												{renderPrice(order.totalPrice)}
 											</td>
 											<td>
 												{order.isPaid ? (

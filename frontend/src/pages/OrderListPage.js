@@ -8,6 +8,7 @@ import Paginate from '../components/Paginate';
 import { refreshLogin } from '../actions/userActions';
 import { listAllOrders } from '../actions/orderActions';
 import getDateString from '../utils/getDateString';
+import { renderPrice } from '../utils';
 
 const ProductListPage = ({ history, match }) => {
 	const pageNumber = match.params.pageNumber || 1; // to fetch various pages of orders
@@ -70,17 +71,10 @@ const ProductListPage = ({ history, match }) => {
 							orders.map((order) => {
 								return (
 									<tr key={order._id}>
-										<td>{order._id}</td>
+										<td>{order.orderID}</td>
 										<td>{order.user && order.user.name}</td>
 										<td>
-											{order.totalPrice.toLocaleString(
-												'en-IN',
-												{
-													maximumFractionDigits: 2,
-													style: 'currency',
-													currency: 'INR',
-												}
-											)}
+											{renderPrice(order.totalPrice)}
 										</td>
 										<td>
 											{getDateString(order.createdAt)}

@@ -1,6 +1,6 @@
 <h1 align="center">
 <img src="https://user-images.githubusercontent.com/42696800/147324216-b7c6f919-e9c4-4e3a-9411-4ffabb3a35d2.png" alt="logo" width="30" height="30" />
-Kosells
+M.Ahmad
 <p align='center'>
 
 <img src='https://img.shields.io/github/license/Rajatm544/MERN-Ecommerce' alt='license'>
@@ -56,7 +56,7 @@ The app has been hosted on heroku [here](https://kosells.herokuapp.com/). (You m
 
 ## Info
 
--   **Kosells** is an installable E-commerce PWA.
+-   **M.Ahmad** is an installable E-commerce PWA.
 -   It has been built from scratch using the MERN stack with the client side using a redux store as well. Bootstrap 5 is used along with some custom styling.
 -   [This course](https://www.udemy.com/share/103Cm43@TuAiV7GxL5Jy8NNbJb_-cpG2FeyqwS5dSG06Z6rhTh6PFAOCA05G77bxDUE-zRHj/) from Brad Traversy was the initial inspiration to build this from scratch. _But there are loads of new additional features throughout the app._
 -   The client side uses React hooks along with Redux.js and redux-thunk middleware

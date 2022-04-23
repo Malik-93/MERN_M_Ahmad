@@ -6,7 +6,8 @@ import store from './store';
 import { HelmetProvider } from 'react-helmet-async';
 import './bootstrap.min.css';
 import './index.css';
-
+import axios from "axios";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 ReactDOM.render(
 	<Provider store={store}>
 		<React.StrictMode>

@@ -21,6 +21,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { refreshLogin } from '../actions/userActions';
 import CheckoutForm from '../components/CheckoutForm'; //stripe checkout form
 import getDateString from '../utils/getDateString';
+import { renderPrice } from '../utils/index';
 
 const OrderPage = ({ match, history }) => {
 	// load stripe
@@ -69,15 +70,15 @@ const OrderPage = ({ match, history }) => {
 		const addScript = async () => {
 			const config = userInfo.isSocialLogin
 				? {
-						headers: {
-							Authorization: `SocialLogin ${userInfo.id}`,
-						},
-				  }
+					headers: {
+						Authorization: `SocialLogin ${userInfo.id}`,
+					},
+				}
 				: {
-						headers: {
-							Authorization: `Bearer ${userInfo.accessToken}`,
-						},
-				  };
+					headers: {
+						Authorization: `Bearer ${userInfo.accessToken}`,
+					},
+				};
 			const { data: clientID } = await axios.get(
 				'/api/config/paypal',
 				config
@@ -115,7 +116,7 @@ const OrderPage = ({ match, history }) => {
 		</Message>
 	) : (
 		<>
-			<h2>Order {orderID}</h2>
+			<h2>Order {order.orderID}</h2>
 			<Row>
 				{loading ? (
 					<Loader />
@@ -210,18 +211,10 @@ const OrderPage = ({ match, history }) => {
 															<Col md={4}>
 																{item.qty} x{' '}
 																{item.price} ={' '}
-																{(
+																{renderPrice((
 																	item.qty *
 																	item.price
-																).toLocaleString(
-																	'en-IN',
-																	{
-																		maximumFractionDigits: 2,
-																		style: 'currency',
-																		currency:
-																			'INR',
-																	}
-																)}
+																))}
 															</Col>
 														</Row>
 													</ListGroup.Item>
@@ -258,14 +251,7 @@ const OrderPage = ({ match, history }) => {
 												<strong>Subtotal</strong>
 											</Col>
 											<Col>
-												{order.itemsPrice.toLocaleString(
-													'en-IN',
-													{
-														maximumFractionDigits: 2,
-														style: 'currency',
-														currency: 'INR',
-													}
-												)}
+												{renderPrice(order.itemsPrice)}
 											</Col>
 										</Row>
 									</ListGroup.Item>
@@ -275,14 +261,9 @@ const OrderPage = ({ match, history }) => {
 												<strong>Shipping</strong>
 											</Col>
 											<Col>
-												{order.shippingPrice.toLocaleString(
-													'en-IN',
-													{
-														maximumFractionDigits: 2,
-														style: 'currency',
-														currency: 'INR',
-													}
-												)}
+												{
+													renderPrice(order.shippingPrice)
+												}
 											</Col>
 										</Row>
 									</ListGroup.Item>
@@ -292,14 +273,9 @@ const OrderPage = ({ match, history }) => {
 												<strong>Tax</strong>
 											</Col>
 											<Col>
-												{order.taxPrice.toLocaleString(
-													'en-IN',
-													{
-														maximumFractionDigits: 2,
-														style: 'currency',
-														currency: 'INR',
-													}
-												)}
+												{
+													renderPrice(order.taxPrice)
+												}
 											</Col>
 										</Row>
 									</ListGroup.Item>
@@ -309,64 +285,62 @@ const OrderPage = ({ match, history }) => {
 												<strong>Total</strong>
 											</Col>
 											<Col>
-												{order.totalPrice.toLocaleString(
-													'en-IN',
-													{
-														maximumFractionDigits: 2,
-														style: 'currency',
-														currency: 'INR',
-													}
-												)}
+												{
+													renderPrice(order.totalPrice)
+
+												}
 											</Col>
 										</Row>
 									</ListGroup.Item>
 									{/* show paypal button or the stripe checkout form */}
-									{!order.isPaid && (
-										<>
-											{order.paymentMethod ===
-											'PayPal' ? (
-												<ListGroup.Item>
-													{loadingPay && <Loader />}
-													{!SDKReady ? (
-														<Loader />
-													) : (
-														<PayPalButton
-															style={{
-																shape: 'rect',
-																color: 'gold',
-																layout: 'vertical',
-																label: 'pay',
-															}}
-															currency='USD'
-															// converting INR to USD, as paypal cannot support INR
-															amount={Number(
-																order.totalPrice /
-																	72
-															).toFixed(2)}
-															onSuccess={
-																successPaymentHandler
-															}
-														/>
-													)}
-												</ListGroup.Item>
-											) : (
-												<ListGroup.Item>
-													{loadingPay && <Loader />}
-													<Elements
-														stripe={stripePromise}>
-														{/* price in paisa */}
-														<CheckoutForm
-															price={
-																order.totalPrice *
-																100
-															}
-															orderID={orderID}
-														/>
-													</Elements>
-												</ListGroup.Item>
-											)}
-										</>
-									)}
+									{!order.isPaid && null
+									//  (
+									// 	<>
+									// 		{order.paymentMethod ===
+									// 			'PayPal' ? (
+									// 			<ListGroup.Item>
+									// 				{loadingPay && <Loader />}
+									// 				{!SDKReady ? (
+									// 					<Loader />
+									// 				) : (
+									// 					<PayPalButton
+									// 						style={{
+									// 							shape: 'rect',
+									// 							color: 'gold',
+									// 							layout: 'vertical',
+									// 							label: 'pay',
+									// 						}}
+									// 						currency='USD'
+									// 						// converting INR to USD, as paypal cannot support INR
+									// 						amount={Number(
+									// 							order.totalPrice /
+									// 							72
+									// 						).toFixed(2)}
+									// 						onSuccess={
+									// 							successPaymentHandler
+									// 						}
+									// 					/>
+									// 				)}
+									// 			</ListGroup.Item>
+									// 		) : (
+									// 			<ListGroup.Item>
+									// 				{loadingPay && <Loader />}
+									// 				<Elements
+									// 					stripe={stripePromise}>
+									// 					{/* price in paisa */}
+									// 					<CheckoutForm
+									// 						price={
+									// 							order.totalPrice *
+									// 							100
+									// 						}
+									// 						orderID={orderID}
+									// 					/>
+									// 				</Elements>
+									// 			</ListGroup.Item>
+									// 		)}
+									// 	</>
+									// )
+									}
 									{/* show this only to admins, after payment is done */}
 									{userInfo &&
 										userInfo.isAdmin &&

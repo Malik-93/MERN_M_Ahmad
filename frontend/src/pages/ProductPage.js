@@ -25,6 +25,7 @@ import { refreshLogin, getUserDetails } from '../actions/userActions';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 import getDateString from '../utils/getDateString';
 import '../styles/product-page.css';
+import { renderPrice } from '../utils/index';
 
 const ProductPage = ({ history, match }) => {
 	const [quantity, setQuantity] = useState(1);
@@ -175,24 +176,18 @@ const ProductPage = ({ history, match }) => {
 									{product && product.rating && (
 										<Rating
 											value={product.rating}
-											text={`${
-												product.numReviews
-											} Review${
-												product.numReviews > 1
+											text={`${product.numReviews
+												} Review${product.numReviews > 1
 													? 's'
 													: ''
-											}`}
+												}`}
 										/>
 									)}
 								</ListGroup.Item>
 								<ListGroup.Item>
 									<strong>Price: </strong>
 									{product.price &&
-										product.price.toLocaleString('en-IN', {
-											maximumFractionDigits: 2,
-											style: 'currency',
-											currency: 'INR',
-										})}
+										renderPrice(product.price)}
 								</ListGroup.Item>
 								<ListGroup.Item>
 									<strong>Description:</strong>{' '}
@@ -209,15 +204,7 @@ const ProductPage = ({ history, match }) => {
 												<strong>Price: </strong>
 											</Col>
 											<Col>
-												{product.price &&
-													product.price.toLocaleString(
-														'en-IN',
-														{
-															maximumFractionDigits: 2,
-															style: 'currency',
-															currency: 'INR',
-														}
-													)}
+												{product.price && renderPrice(product.price)}
 											</Col>
 										</Row>
 									</ListGroup.Item>

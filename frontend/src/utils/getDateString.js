@@ -16,5 +16,4 @@ const getDateString = (date, showTime = true) => {
 	if (showTime) result += `${timeStr} `;
 	return result + new Date(date).toLocaleDateString('en', options);
 };
-
 export default getDateString;

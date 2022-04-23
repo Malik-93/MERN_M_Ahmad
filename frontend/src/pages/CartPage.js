@@ -14,6 +14,7 @@ import Meta from '../components/Meta';
 import Message from '../components/Message';
 import { refreshLogin, getUserDetails } from '../actions/userActions';
 import { addItem, removeItem } from '../actions/cartActions';
+import { renderPrice } from '../utils';
 
 const CartPage = ({ match, location, history }) => {
 	const [totalItems, setTotalItems] = useState(0);
@@ -74,7 +75,7 @@ const CartPage = ({ match, location, history }) => {
 
 	return (
 		<Row>
-			<Meta title='My Cart | Kosells' />
+			<Meta title='My Cart | M.Ahmad' />
 			<Col md={8}>
 				<h1>Shopping Cart.</h1>
 				{!cartItems.length ? (
@@ -111,11 +112,7 @@ const CartPage = ({ match, location, history }) => {
 											alignItems: 'center',
 											justifyContent: 'space-evenly',
 										}}>
-										{item.price.toLocaleString('en-IN', {
-											maximumFractionDigits: 2,
-											style: 'currency',
-											currency: 'INR',
-										})}
+										{renderPrice(item.price)}
 
 										<div>
 											<i
@@ -197,14 +194,7 @@ const CartPage = ({ match, location, history }) => {
 												fontSize: '1.2em',
 												width: '50%',
 											}}>
-											{item.price.toLocaleString(
-												'en-IN',
-												{
-													maximumFractionDigits: 2,
-													style: 'currency',
-													currency: 'INR',
-												}
-											)}
+											{renderPrice(item.price)}
 
 											<div className='ms-1'>
 												<i
@@ -292,14 +282,10 @@ const CartPage = ({ match, location, history }) => {
 								{cartItems
 									.reduce(
 										(acc, item) =>
-											acc + item.qty * item.price,
+											renderPrice(acc + item.qty * item.price),
 										0
 									)
-									.toLocaleString('en-IN', {
-										maximumFractionDigits: 2,
-										style: 'currency',
-										currency: 'INR',
-									})}
+								}
 							</strong>
 						</ListGroup.Item>
 						<ListGroup.Item>

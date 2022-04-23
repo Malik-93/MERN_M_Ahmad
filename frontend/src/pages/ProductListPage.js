@@ -12,6 +12,7 @@ import {
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 import Paginate from '../components/Paginate';
 import { refreshLogin, getUserDetails } from '../actions/userActions';
+import { renderPrice } from '../utils';
 
 const ProductListPage = ({ history, match }) => {
 	const pageNumber = match.params.pageNumber || 1;
@@ -141,14 +142,7 @@ const ProductListPage = ({ history, match }) => {
 											<td>{product.name}</td>
 											<td>
 												{product.price &&
-													product.price.toLocaleString(
-														'en-IN',
-														{
-															maximumFractionDigits: 2,
-															style: 'currency',
-															currency: 'INR',
-														}
-													)}
+													renderPrice(product.price)}
 											</td>
 											<td>{product.category}</td>
 											<td>{product.brand}</td>

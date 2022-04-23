@@ -6,6 +6,7 @@ import Message from './Message';
 import { getTopRatedProducts } from '../actions/productActions';
 import '../styles/product-carousel.css';
 import CarouselSkeleton from '../components/CarouselSkeleton';
+import { renderPrice } from '../utils';
 
 const ProductCarousel = () => {
 	const dispatch = useDispatch();
@@ -42,11 +43,7 @@ const ProductCarousel = () => {
 								/>
 								<Carousel.Caption className='carousel-caption'>
 									{product.name} (
-									{product.price.toLocaleString('en-IN', {
-										maximumFractionDigits: 2,
-										style: 'currency',
-										currency: 'INR',
-									})}
+									{renderPrice(product.price)}
 									)
 								</Carousel.Caption>
 							</Link>

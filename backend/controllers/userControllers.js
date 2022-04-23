@@ -95,12 +95,12 @@ const authUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 
 	let user = await User.findOne({ email });
-	// generate both the access and the refresh tokens
-	const accessToken = generateToken(user._id, 'access');
-	const refreshToken = generateToken(user._id, 'refresh');
 
 	// if the passwords are matching, then check if a refresh token exists for this user
 	if (user && (await user.matchPassword(password))) {
+		// generate both the access and the refresh tokens
+		const accessToken = generateToken(user._id, 'access');
+		const refreshToken = generateToken(user._id, 'refresh');
 		const existingToken = await Token.findOne({ email });
 		// if no refresh token available, create one and store it in the db
 		if (!existingToken) {

@@ -81,7 +81,7 @@ const Header = () => {
 								className='nav-logo'
 								alt='logo'
 							/>
-							Kosells
+							M.Ahmad
 						</Navbar.Brand>
 					</LinkContainer>
 

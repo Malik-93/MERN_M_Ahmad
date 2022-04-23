@@ -3,6 +3,7 @@ import Rating from './Rating';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import '../styles/product.css';
+import { renderPrice } from '../utils';
 
 const Product = ({ product }) => {
 	return (
@@ -27,23 +28,17 @@ const Product = ({ product }) => {
 				</Link>
 
 				<Card.Text as='div'>
-					{product && product.rating && (
-						<Rating
-							value={product.rating}
-							text={`${product.numReviews} Review${
-								product.numReviews > 1 ? 's' : ''
+					<Rating
+						value={product.rating}
+						text={`${product.numReviews} Review${product.numReviews > 1 ? 's' : ''
 							}`}
-						/>
-					)}
+					/>
 				</Card.Text>
 
 				<Card.Text as='h4'>
 					{product.price &&
-						product.price.toLocaleString('en-IN', {
-							maximumFractionDigits: 2,
-							style: 'currency',
-							currency: 'INR',
-						})}
+						renderPrice(product.price)
+					}
 				</Card.Text>
 			</Card.Body>
 		</Card>

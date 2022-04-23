@@ -5,9 +5,9 @@ import generateGravatar from '../utils/generateGravatar.js';
 
 // all passport strategies
 import GoogleStrategy from 'passport-google-oauth20';
-import GithubStrategy from 'passport-github2';
-import TwitterStrategy from 'passport-twitter';
-import LinkedInStrategy from 'passport-linkedin-oauth2';
+// import GithubStrategy from 'passport-github2';
+// import TwitterStrategy from 'passport-twitter';
+// import LinkedInStrategy from 'passport-linkedin-oauth2';
 
 // to use .env variables in this file
 dotenv.config();

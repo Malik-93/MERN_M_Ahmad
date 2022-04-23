@@ -80,13 +80,23 @@ const PaymentPage = ({ history }) => {
 							<Form.Check
 								inline
 								type='radio'
+								label='Cash On Delivery'
+								id='cash_on_delivery'
+								name='paymentMethod'
+								value='Cash On Delivery'
+								checked={paymentMethod === 'Cash On Delivery'}
+								onChange={handleChange}
+							/>
+							{/* <Form.Check
+								inline
+								type='radio'
 								label='PayPal Account'
 								id='PayPal'
 								name='paymentMethod'
 								value='PayPal'
 								checked={paymentMethod === 'PayPal'}
 								onChange={handleChange}
-							/>
+							/> */}
 						</Col>
 					</Form.Group>
 					<div className='d-grid'>

@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
+import { uniqueIdGenerator } from '../utils/index.js';
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -25,10 +26,11 @@ const addOrderItems = asyncHandler(async (req, res) => {
 		throw new Error('No order items');
 	} else {
 		const order = new Order({
+			orderID: uniqueIdGenerator(),
 			user: req.user._id,
 			orderItems,
 			shippingAddress,
-			paymentMethod,
+			paymentMethod: "Cash on Delivery",
 			itemsPrice,
 			shippingPrice,
 			taxPrice,

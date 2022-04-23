@@ -36,7 +36,7 @@ const Footer = () => {
 						<i className='fas fa-globe-asia footer-icon' />
 					</a>
 				</div>
-				<div className='footer-copyright'>&copy;2021 Kosells</div>
+				<div className='footer-copyright'>&copy;2021 M.Ahmad</div>
 			</footer>
 		</Container>
 	);

@@ -188,7 +188,7 @@ const ProductEditPage = ({ match, history }) => {
 											type='number'
 											value={price}
 											min='0'
-											max='1000'
+											max='10000'
 											step='0.1'
 											onChange={(e) =>
 												setPrice(e.target.value)
