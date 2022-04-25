@@ -6,6 +6,7 @@ import '../styles/product.css';
 import { renderPrice } from '../utils';
 
 const Product = ({ product }) => {
+	// console.log("Product", product);
 	return (
 		<Card className='mt-3 p-0'>
 			<Link to={`/product/${product._id}`}>

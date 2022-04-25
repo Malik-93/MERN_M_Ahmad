@@ -9,7 +9,6 @@ import passport from 'passport'; // for all social login options
 import cookieSession from 'cookie-session'; // for implementing cookie sessions for passport
 import flash from 'connect-flash'; // so that passport flash messages can work
 import path from 'path';
-
 // middleware
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
@@ -20,9 +19,11 @@ import orderRoutes from './routes/orderRoutes.js';
 import configRoutes from './routes/configRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import setupPassport from './config/passportSetup.js';
-
+import envSetup from './config/envSetup.js';
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 5000;
+envSetup(PORT)
 
 // use morgan in development mode
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
@@ -49,7 +50,6 @@ app.use(flash());
 
 // setup passport
 setupPassport();
-
 // configure all the routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
@@ -61,6 +61,7 @@ app.use('/api/upload', uploadRoutes);
 const __dirname = path.resolve();
 
 // To prepare for deployment
+app.use('/uploads', express.static('uploads'));
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '/frontend/build')));
 
@@ -75,10 +76,10 @@ app.use(notFound);
 // configure a custome error handler middleware
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
+app.listen(PORT, () => {
 	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
+		`Server running in ${process.env.NODE_ENV} mode on ${process.env.FRONTEND_BASE_URL}`.yellow
 			.bold
 	)
+}
 );
