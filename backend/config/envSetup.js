@@ -19,8 +19,8 @@ const envSetup = (...args) => {
         // dns.lookup(os.hostname(), function (err, add, fam) {
         //     process.env["FRONTEND_BASE_URL"] = `http://${add}:${PORT}`
         // })
-
     } else {
+        process.env["MONGO_URI"] = `${process.env.PRODUCTION_MONGO_URI}`
         //  .env values in production mode
 
     }
