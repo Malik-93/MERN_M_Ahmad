@@ -62,6 +62,9 @@ const __dirname = path.resolve();
 
 // To prepare for deployment
 app.use('/uploads', express.static('uploads'));
+app.use('/', (req, res) => {
+	res.end("Application is working...")
+});
 // if (process.env.NODE_ENV === 'production') {
 // 	app.use(express.static(path.join(__dirname, '/frontend/build')));
 
