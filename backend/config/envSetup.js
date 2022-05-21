@@ -20,7 +20,7 @@ const envSetup = (...args) => {
         //     process.env["FRONTEND_BASE_URL"] = `http://${add}:${PORT}`
         // })
     } else {
-        // process.env["MONGO_URI"] = `${process.env.PRODUCTION_MONGO_URI}`
+        process.env["MONGO_URI"] = `${process.env.PRODUCTION_MONGO_URI}`
         // process.env["NODE_BASE_URL"] = `${process.env.NODE_BASE_URL}`
         //  .env values in production mode
 

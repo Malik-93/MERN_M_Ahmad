@@ -62,13 +62,13 @@ const __dirname = path.resolve();
 
 // To prepare for deployment
 app.use('/uploads', express.static('uploads'));
-// if (process.env.NODE_ENV === 'production') {
-// 	app.use(express.static(path.join(__dirname, '/frontend/build')));
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-// 	app.use('*', (req, res) =>
-// 		res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-// 	);
-// }
+	app.use('*', (req, res) =>
+		res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+	);
+}
 
 // middleware to act as fallback for all 404 errors
 app.use(notFound);
