@@ -31,9 +31,8 @@ const App = () => {
 		<Router>
 			<Header />
 			<ServiceWorkerWrapper />
-
 			<main className='py-2'>
-				<Container>
+				<Container fluid>
 					<Switch>
 						<Route path='/' component={HomePage} exact />
 						<Route

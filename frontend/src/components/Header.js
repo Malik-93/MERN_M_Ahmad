@@ -73,30 +73,22 @@ const Header = () => {
 
 			{/* conditionally render different navbars for the mobile sreens */}
 			<Navbar bg='primary' variant='dark' expand='lg'>
-				<Container>
-					<LinkContainer to='/'>
+				<Container fluid style={{display: "flex", aligItems: "center", justifyContent: "center"}}>
+					<LinkContainer to='/' style={{fontSize: "1.5rem",}}>
 						<Navbar.Brand>
 							<img
-								src='/images/kosells.png'
+								src='/images/M.Ahmad_logo_2.png'
 								className='nav-logo'
 								alt='logo'
 							/>
-							M.Ahmad
 						</Navbar.Brand>
 					</LinkContainer>
-
 					{/* history is available only inside Route, so this is used */}
 					{/* display searchbar inside navbar in large screens only */}
-					<Route
-						render={({ history }) => (
-							<div className='d-none d-md-block'>
-								<SearchBox history={history} />
-							</div>
-						)}
-					/>
+				
 
 					<Nav
-						className='ms-auto nav-mobile'
+						className='ms-auto nav-mobile align-items-center'
 						style={
 							userInfo
 								? {
@@ -105,6 +97,7 @@ const Header = () => {
 								: {
 										justifyContent: 'space-evenly',
 								  }
+							
 						}>
 						{userInfo && userInfo.isAdmin && (
 							<>
@@ -132,6 +125,13 @@ const Header = () => {
 								</LinkContainer>
 							</>
 						)}
+							<Route
+						render={({ history }) => (
+							<div className='d-none d-md-block'>
+								<SearchBox history={history} />
+							</div>
+						)}
+					/>
 						<LinkContainer to='/cart'>
 							<Nav.Link>
 								{/* indicate cart size */}
@@ -234,6 +234,36 @@ const Header = () => {
 							</LinkContainer>
 						)}
 					</Nav>
+				</Container>
+			</Navbar>
+
+			<Navbar variant='dark' expand='lg' style={{backgroundColor: "gray",}}>
+				<Container fluid style={{justifyContent: "center",}}>
+					<LinkContainer to='/' style={{color: "black", fontSize: "1.1rem", width: "auto", fontWeight: "600", marginRight: "50px",}}>
+						<Navbar.Brand className=''>
+							<span>Home</span>
+						</Navbar.Brand>
+					</LinkContainer>
+					<LinkContainer to='/' style={{color: "black", fontSize: "1.1rem", width: "auto", fontWeight: "600", marginRight: "50px",}}>
+						<Navbar.Brand className=''>
+							<span>Men</span>
+						</Navbar.Brand>
+					</LinkContainer>
+					<LinkContainer to='/' style={{color: "black", fontSize: "1.1rem", width: "auto", fontWeight: "600", marginRight: "50px",}}>
+						<Navbar.Brand className=''>
+							<span>Women</span>
+						</Navbar.Brand>
+					</LinkContainer>
+					<LinkContainer to='/' style={{color: "black", fontSize: "1.1rem", width: "auto", fontWeight: "600", marginRight: "50px",}}>
+						<Navbar.Brand className=''>
+							<span>Sale</span>
+						</Navbar.Brand>
+					</LinkContainer>
+					<LinkContainer to='/' style={{color: "black", fontSize: "1.1rem", width: "auto", fontWeight: "600", marginRight: "50px",}}>
+						<Navbar.Brand className=''>
+							<span>New Arrivals</span>
+						</Navbar.Brand>
+					</LinkContainer>
 				</Container>
 			</Navbar>
 		</header>

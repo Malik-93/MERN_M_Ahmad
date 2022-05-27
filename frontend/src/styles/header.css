@@ -2,16 +2,24 @@ button.navbar-toggle-btn:focus {
     box-shadow: none;
 }
 
+.navbar {
+    padding: 0.5rem 0rem !important;
+}
+
 .navbar-brand {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 12%;
+    width: 6%;
+    font-size: 1rem;
+}
+
+.pages_link {
+    font-size: 1rem;
 }
 
 .nav-logo {
-    width: 1.8em;
-    height: 1.8em;
+    width: 2.8em;
 }
 
 .nav-cart-size {
@@ -89,7 +97,7 @@ button.navbar-toggle-btn:focus {
 
     .navbar-brand {
         width: auto;
-        max-width: 50%;
+        max-width: 12%;
     }
 
     .nav-avatar-container {
